@@ -1,0 +1,26 @@
+class Solution {
+    int kmp(string &s){
+        int n = s.size();
+        vector<int> lp(n,0);
+        int i =1,j=0;
+        while(i<n){
+            if(s[i]==s[j]){
+                lp[i]=j+1;
+                i++;
+                j++;
+            }else{
+                if(j!=0){
+                    j=lp[j-1];
+                }else{
+                    i++;
+                }
+            }
+        }
+        return lp[n-1];
+    }
+public:
+    string longestPrefix(string &s) {
+        int last = kmp(s);
+        return s.substr(0,last);
+    }
+};
